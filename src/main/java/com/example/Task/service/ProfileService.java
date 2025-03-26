@@ -12,4 +12,6 @@ public interface ProfileService {
     ProfileDto followAnotherId(long id) throws ResourceNotFoundException;
 
     ProfileDto unfollowAnotherId(long id) throws ResourceNotFoundException;
+
+
 }

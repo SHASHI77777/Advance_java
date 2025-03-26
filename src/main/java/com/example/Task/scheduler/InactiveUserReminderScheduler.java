@@ -26,7 +26,7 @@ public class InactiveUserReminderScheduler {
     @Value("${inactive.period.days}")
     private int inactivePeriodDays;
 
-    @Scheduled(cron = "${scheduler.cron.expressions}")
+    @Scheduled(cron = "${scheduler.cron.expression}")
     public void checkInactiveUsers() {
         LocalDateTime inactiveThresholdDate = LocalDateTime.now().minusDays(inactivePeriodDays);
 

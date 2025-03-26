@@ -3,8 +3,9 @@ package com.example.Task.controller;
 
 import com.example.Task.dto.ProfileDto;
 import com.example.Task.exception.ResourceNotFoundException;
+import com.example.Task.service.JWTService;
 import com.example.Task.service.ProfileService;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,9 @@ public class ProfileController {
     @Autowired
     private ProfileService profileService;
 
+    @Autowired
+    private JWTService jwtService;
+
     //  /profiles/{id}--get profile details based on id
     @GetMapping("/{id}")
     public ResponseEntity<ProfileDto>getProfileById(@PathVariable("id")long id) throws ResourceNotFoundException
@@ -33,12 +37,13 @@ public class ProfileController {
         return new ResponseEntity<>( profileService.updateProfileById(id,profileDto),HttpStatus.OK);
     }
 
-    //POST /profiles/{id}/follow: Follow another id
+//    POST /profiles/{id}/follow: Follow another id
     @PostMapping("{id}/follow")
     public ResponseEntity<ProfileDto>followAnotherId(@PathVariable("id")long id) throws ResourceNotFoundException {
         return new ResponseEntity<>(profileService.followAnotherId(id),HttpStatus.OK);
 
     }
+
 
     //POST /profiles/{id}/unfollow: Unfollow a id
     @PostMapping("{id}/unfollow")
